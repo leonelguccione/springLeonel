@@ -19,8 +19,9 @@ public class Pet
     private Integer id;
     private String name;
     private Integer kg;
-    @ManyToOne(fetch=FetchType.LAZY, optional = false)
-    @JoinColumn(name="person_id", nullable = false)
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JsonBackReference
+    //@JoinColumn(name="person_id", nullable = false) //esto tira error al crear una Pet sin referencia a una Person
     private Person person;
 
 }
