@@ -4,10 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 
@@ -15,13 +12,14 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity //la clase es una entidad de persistencia
+@Table(name="PERSONS")//agregado Leonel https://inezpre5.wordpress.com/2018/05/07/select-dependientes-con-spring-boot-mysql-y-angularjs/
 public class Person
 {
     @Id //primary Key por ser Entity
-    @GeneratedValue //autogenerada
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //autogenerada
     private Integer id;
     private String name;
     private String lastName;
-    //@OneToMany(mappedBy = "person")
-    //private List<Pet> pets;
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Pet> pets;
 }

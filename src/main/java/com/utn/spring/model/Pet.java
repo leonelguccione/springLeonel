@@ -11,6 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity
+@Table(name="PETS")
 public class Pet
 {
     @Id
@@ -18,8 +19,8 @@ public class Pet
     private Integer id;
     private String name;
     private Integer kg;
-    //@ManyToOne(fetch=FetchType.EAGER) //TODO: Ver esto
-    //@JsonBackReference //este objeto persona que esta en Pet en realidad es una referencia. Evita el bucle infinito al armar un String.
-    //private Person person;
+    @ManyToOne(fetch=FetchType.LAZY, optional = false)
+    @JoinColumn(name="person_id", nullable = false)
+    private Person person;
 
 }
